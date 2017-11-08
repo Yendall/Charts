@@ -8,8 +8,8 @@
 
     @if($model->height)
         ctx.style.height = "100px";
-        ctx.height = {!! $model->height !!};
-    @endif
+    ctx.height = {!! $model->height !!};
+        @endif
 
     var data = {
             labels: [
@@ -19,7 +19,7 @@
             ],
             datasets: [
                 {
-                    fill: false,
+                    fill: true,
                     label: "{!! $model->element_label !!}",
                     lineTension: 0.3,
                     @if($model->colors)

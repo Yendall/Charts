@@ -3,48 +3,59 @@
 @endif
 
 <script type="text/javascript">
-    var ctx = document.getElementById("{{ $model->id }}")
+    var ctx = document.getElementById("{{ $model->id }}");
+    var options = {!! $model->extraOptions !!};
+
+    @if($model->height)
+        ctx.style.height = "100px";
+        ctx.height = {!! $model->height !!};
+    @endif
+
     var data = {
-        labels: [
-            @foreach($model->labels as $label)
-                "{!! $label !!}",
-            @endforeach
-        ],
-        datasets: [
-            {
-                fill: false,
-                label: "{!! $model->element_label !!}",
-                lineTension: 0.3,
-                @if($model->colors)
+            labels: [
+                @foreach($model->labels as $label)
+                    "{!! $label !!}",
+                @endforeach
+            ],
+            datasets: [
+                {
+                    fill: false,
+                    label: "{!! $model->element_label !!}",
+                    lineTension: 0.3,
+                    @if($model->colors)
                     borderColor: "{{ $model->colors[0] }}",
                     backgroundColor: "{{ $model->colors[0] }}",
-                @endif
-                data: [
-                    @foreach($model->values as $dta)
+                    @endif
+                    data: [
+                        @foreach($model->values as $dta)
                         {{ $dta }},
-                    @endforeach
-                ],
-            }
-        ]
-    };
+                        @endforeach
+                    ],
+                }
+            ]
+        };
 
     var {{ $model->id }} = new Chart(ctx, {
         type: 'line',
         data: data,
-        options: {
-            responsive: {{ $model->responsive || !$model->width ? 'true' : 'false' }},
-            maintainAspectRatio: false,
-            @if($model->title)
+        @if($model->extraOptions)
+        options: options
+        @else
+        options:
+            {
+                responsive: {{ $model->responsive || !$model->width ? 'true' : 'false' }},
+                maintainAspectRatio: false,
+                @if($model->title)
                 title: {
                     display: true,
                     text: "{!! $model->title !!}",
                     fontSize: 20,
                 }
-            @endif
-
-            @if($model->extraOptions)
-                {!! $model->extraOptions !!}
-            @endif
-        }
+                @endif
+            }
+        @endif
     });
+
+
+
 </script>

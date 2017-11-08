@@ -51,6 +51,7 @@ class Chart
     public $script = '';
     public $html = '';
     public $export;
+    public $extraOptions;
 
     /**
      * Create a new chart instance.
@@ -94,6 +95,8 @@ class Chart
         $this->template = config('charts.default.template');
 
         $this->one_color = config('charts.default.one_color');
+
+        $this->extraOptions = null;
     }
 
     /**

@@ -17,6 +17,19 @@ namespace ConsoleTVs\Charts\Traits;
  */
 trait Setters
 {
+    /***
+     * Set the chart options (for use with chartJS specifically)
+     *
+     * @param $extra_options
+     *
+     * @return Chart
+     */
+    public function extraOptions($extra_options)
+    {
+        $this->extraOptions = $extra_options;
+
+        return $this;
+    }
     /**
      * Set the chart one color attribute.
      *
@@ -251,7 +264,7 @@ trait Setters
     public function colors($colors)
     {
         $this->colors = $colors;
-        
+
         return $this;
     }
 

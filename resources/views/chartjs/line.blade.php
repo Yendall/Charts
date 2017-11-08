@@ -41,6 +41,10 @@
                     fontSize: 20,
                 }
             @endif
+
+            @if($model->extraOptions)
+                {!! $model->extraOptions !!}
+            @endif
         }
     });
 </script>
